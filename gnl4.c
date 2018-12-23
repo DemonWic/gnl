@@ -6,13 +6,13 @@
 /*   By: ahintz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/19 20:36:45 by ahintz            #+#    #+#             */
-/*   Updated: 2018/12/23 12:42:16 by ahintz           ###   ########.fr       */
+/*   Updated: 2018/12/23 12:59:26 by ahintz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
-# define BUFF_SIZE 9999
+# define BUFF_SIZE 1
 
 
 t_list		*check(t_list *list, const int fd)
@@ -66,15 +66,15 @@ int		get_next_line(const int fd, char **line)
 	k = 0;
 	if (ft_strcmp(list->content, "\0"))
 	{
-		*line = set_n(list->content, list, 0);
+		*line = set_n(list->content, list, &f);
 		k = 1;
 	}
-	while ((ret = read(fd, buf, BUFF_SIZE)))
+	while ((ret = read(fd, buf, BUFF_SIZE)) && !f)
 	{
 		buf[ret] = '\0';
 		if (!k)
 		{
-			*line = ft_strdup(buf);
+			*line = set_n(buf, list, &f);
 			k = 1;
 		}
 		else
@@ -98,6 +98,8 @@ int		main(int argc, char **argv)
 	int fd;
 	char *res;
 	fd = open(argv[1], O_RDONLY, 0);
+	get_next_line(fd, &res);
+	printf("%s\n", res);
 	get_next_line(fd, &res);
 	printf("%s\n", res);
 	get_next_line(fd, &res);
