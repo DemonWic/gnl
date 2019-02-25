@@ -6,7 +6,7 @@
 /*   By: ahintz <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 15:03:45 by ahintz            #+#    #+#             */
-/*   Updated: 2019/01/14 19:30:42 by ahintz           ###   ########.fr       */
+/*   Updated: 2019/01/12 15:48:40 by ahintz           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	int		i;
-	int		j;
 	int		size;
 	char	*res;
 
 	i = 0;
-	j = 0;
 	if (!(s1) || !(s2))
 		return (NULL);
 	size = ft_strlen(s1) + ft_strlen(s2) + 1;
@@ -31,11 +29,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	{
 		if (s1[i])
 			res[i] = s1[i];
-		else if (s1[i] == '\0' && s2[j])
-		{
-			res[i] = s2[j];
-			j++;
-		}
+		else if (s1[i] == '\0' && s2[i])
+			res[i] = s2[i];
 		i++;
 	}
 	res[i] = '\0';
